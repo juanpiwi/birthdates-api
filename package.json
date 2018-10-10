@@ -1,0 +1,29 @@
+{
+  "name": "birthdates-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juanpiwi/birthdates-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juanpiwi/birthdates-api/issues"
+  },
+  "homepage": "https://github.com/juanpiwi/birthdates-api#readme",
+  "dependencies": {
+    "dotenv": "^6.1.0",
+    "http-status": "^1.2.0",
+    "joi": "^13.7.0",
+    "mongoose": "^5.3.2",
+    "restify": "^7.2.1",
+    "restify-errors": "^6.1.1",
+    "restify-url-semver": "^1.1.1",
+    "winston": "^3.1.0"
+  }
+}
