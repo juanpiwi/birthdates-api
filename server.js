@@ -4,6 +4,15 @@ require('dotenv').config();
 const config = require('./app/config/configs')();
 const restify = require('restify');
 const versioning = require('restify-url-semver');
+const joi = require('joi');
+
+// Require DI
+const serviceLocator = require('./app/configs/di');
+const validator = require('./app/lib/validator');
+const handler = require('./app/lib/error_handler');
+const routes = require('./app/routes/routes');
+const logger = serviceLocator.get('logger');
+
 
 // Initialize and configure restify server
 const server = restify.createServer({
@@ -13,6 +22,10 @@ const server = restify.createServer({
     'application/json': require('./app/lib/jsend')
   }
 });
+
+// Initialize the database
+const Database = require('./app/configs/database');
+new Database(config.mongo.port, config.mongo.host, config.mongo.name);
 
 // Set API versioning and allow trailing slashes
 server.pre(restify.pre.sanitizePath());
@@ -26,6 +39,15 @@ server.use(
     mapParams: false
   })
 );
+
+// initialize validator for all requests
+server.use(validator.paramValidation(logger, joi));
+
+// Setup Error Event Handling
+handler.register(server);
+
+// Setup route Handling
+routes.register(server, serviceLocator);
 
 // start server
 server.listen(config.app.port, () => {
