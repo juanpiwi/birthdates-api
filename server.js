@@ -7,7 +7,7 @@ const versioning = require('restify-url-semver');
 const joi = require('joi');
 
 // Require DI
-const serviceLocator = require('./app/configs/di');
+const serviceLocator = require('./app/config/di');
 const validator = require('./app/lib/validator');
 const handler = require('./app/lib/error_handler');
 const routes = require('./app/routes/routes');
@@ -24,7 +24,7 @@ const server = restify.createServer({
 });
 
 // Initialize the database
-const Database = require('./app/configs/database');
+const Database = require('./app/config/database');
 new Database(config.mongo.port, config.mongo.host, config.mongo.name);
 
 // Set API versioning and allow trailing slashes
