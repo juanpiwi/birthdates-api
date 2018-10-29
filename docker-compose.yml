@@ -5,10 +5,11 @@ services:
       container_name: web_app
       build: .
       depends_on:
-      - mongodb
-      # command: node server.js
+        - mongodb
+      environment:
+        - DB_HOST=mongodb
       ports:
-      - "5001:5000"
+        - "5001:5000"
   mongodb:
       container_name: mongodb
       image: mongo
