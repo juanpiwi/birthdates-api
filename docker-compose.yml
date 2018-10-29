@@ -1,0 +1,20 @@
+version: "3"
+services:
+
+  web:
+      container_name: web_app
+      build: .
+      depends_on:
+      - mongodb
+      # command: node server.js
+      ports:
+      - "5001:5000"
+  mongodb:
+      container_name: mongodb
+      image: mongo
+      restart: always
+      # volumes:
+      #   - ./data:/data/db
+      ports:
+        - 27017:27017
+      # command: mongod --smallfiles --logpath=/dev/null # --quiet
